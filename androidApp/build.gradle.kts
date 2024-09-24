@@ -39,6 +39,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
 }
 
 dependencies {
@@ -52,3 +53,4 @@ dependencies {
     implementation(project.dependencies.platform(libs.firebase.bom))
     implementation(libs.firebase.crashlyticsKtx)
 }
+

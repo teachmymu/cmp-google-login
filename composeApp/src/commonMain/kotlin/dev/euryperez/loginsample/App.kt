@@ -20,7 +20,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.euryperez.loginsample.utils.compositionlocals.LocalResources
 import dev.euryperez.loginsample.signin.GoogleButton
+import dev.euryperez.loginsample.signin.GoogleLogoutButton
 import dev.euryperez.loginsample.signin.models.AuthResponse
+import dev.euryperez.loginsample.utils.ImageFromUrl
 import dev.euryperez.loginsample.utils.ResourcesImpl
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -35,20 +37,38 @@ fun App() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 var userName: String by remember { mutableStateOf("") }
+                var imageUrl: String by remember { mutableStateOf("") }
 
-                GoogleButton(
-                    onResponse = {
-                        (it as? AuthResponse.Success)?.account?.profile?.name?.let { name ->
-                            userName = name
+                if (userName.isEmpty()) {
+                    GoogleButton(
+                        onResponse = {
+                            println("Response: $it")
+                            (it as? AuthResponse.Success)?.account?.profile?.let { profile ->
+                                userName = profile.name
+                                imageUrl = profile.picture ?: ""
+                            }
                         }
-                    }
-                )
-
+                    )
+                }else{
+                    GoogleLogoutButton(
+                        onLogout = {
+                            userName = ""  // Clear the username when the user logs out
+                        }
+                    )
+                }
                 Spacer(modifier = Modifier.height(20.dp))
 
                 if (userName.isNotEmpty()) {
                     Text("Welcome $userName")
+                    Spacer(modifier = Modifier.height(20.dp))
+                    ImageFromUrl(
+                        url = imageUrl,
+                        modifier = Modifier
+                    )
+
+
                 }
+
             }
         }
     }

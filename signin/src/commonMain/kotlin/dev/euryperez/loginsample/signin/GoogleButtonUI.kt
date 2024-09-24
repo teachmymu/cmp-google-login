@@ -23,7 +23,8 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 internal fun GoogleButtonUI(
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    title: String
 ) {
     Button(
         modifier = modifier,
@@ -42,12 +43,12 @@ internal fun GoogleButtonUI(
             contentDescription = null
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Text("Continue with Google")
+        Text(title)
     }
 }
 
 @Preview
 @Composable
 private fun GoogleButtonPreview() {
-    GoogleButtonUI(onClick = {})
+    GoogleButtonUI( onClick = {} , title = "Sign in with Google")
 }

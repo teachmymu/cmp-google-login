@@ -31,7 +31,7 @@ fun GoogleButton(
             coroutineScope.launch(Dispatchers.IO) {
                 response.doOnSuccess { account ->
                     Firebase.auth.signInWithCredential(
-                        GoogleAuthProvider.credential(account.idToken, account.accessToken)
+                        GoogleAuthProvider.credential(account.idToken, null)
                     )
                 }
 
@@ -40,3 +40,4 @@ fun GoogleButton(
         }
     )
 }
+

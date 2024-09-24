@@ -12,4 +12,12 @@ sealed interface AuthResponse {
             is Error -> Unit
         }
     }
+
+    suspend fun doOnError(block: suspend (String) -> Unit) {
+        when(this) {
+            is Success -> Unit
+            Cancelled -> Unit
+            is Error -> block(message)
+        }
+    }
 }

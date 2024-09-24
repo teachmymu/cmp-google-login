@@ -21,12 +21,13 @@ internal actual fun GoogleLoginButton(
     modifier: Modifier
 ) {
     val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-        .requestIdToken("PLACE_YOUR_CLIENT_ID_HERE")
         .requestEmail()
         .build()
 
     val activity = LocalContext.current as Activity
     val googleSignInClient = GoogleSignIn.getClient(activity, gso)
+
+
 
     val launcher =
         rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -48,7 +49,7 @@ internal actual fun GoogleLoginButton(
 
     GoogleButtonUI(
         modifier = modifier,
-        onClick = { launcher.launch(googleSignInClient.signInIntent) },
+        onClick = { launcher.launch(googleSignInClient.signInIntent)}, title = "Login with Google" ,
     )
 }
 
