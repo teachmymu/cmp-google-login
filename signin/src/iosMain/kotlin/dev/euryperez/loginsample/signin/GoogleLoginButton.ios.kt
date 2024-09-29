@@ -21,7 +21,8 @@ internal actual fun GoogleLoginButton(
 
     GoogleButtonUI(
         modifier = modifier,
-        onClick = { googleLogin(uiViewController, onResponse) }
+        onClick = { googleLogin(uiViewController, onResponse) },
+        title = "Login with Google"
     )
 }
 
